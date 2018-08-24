@@ -13,7 +13,7 @@ class FinalApp extends React.Component {
                 <App />
                 {heading.map((data, index) => {
                     return (
-                        <ThisScope heading={data} detail={detail[index]} />
+                        <ThisScope key={index+3} heading={data} id={index + 1} detail={detail[index]} />
                     )
                 }
                 )}
