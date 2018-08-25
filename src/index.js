@@ -11,18 +11,18 @@ class FinalApp extends React.Component {
         return (
             <div>
                 <App />
-                {heading.map((data, index) => {
+                {/* {heading.map((data, index) => {
                     return (
                         <ThisScope key={index+3} heading={data} id={index + 1} detail={detail[index]} />
                     )
                 }
-                )}
+                )} */}
             </div>
         )
     }
 }
-if (module.hot) {
-    module.hot.accept()
-}
+// if (module.hot) {
+//     module.hot.accept()
+// }
 ReactDOM.render(<FinalApp />, document.getElementById('root'));
 registerServiceWorker();
