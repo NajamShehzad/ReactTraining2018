@@ -16,6 +16,7 @@ export default class TodoList extends Component {
         this.addTodo = this.addTodo.bind(this);
         this.cancle = this.cancle.bind(this);
         this.update = this.update.bind(this);
+        this.table = this.table.bind(this);
 
     }
 
@@ -62,13 +63,14 @@ export default class TodoList extends Component {
             return ({
                 todos,
                 currentIndex: null,
-                text:''
+                text: ''
             })
         })
     }
     cancle() {
         this.setState({
-            currentIndex: null
+            currentIndex: null,
+            text:''
         })
     }
 
@@ -95,11 +97,46 @@ export default class TodoList extends Component {
             </div>
         )
     }
+    table() {
+        const { todos } = this.state;
 
+        return (
+            <table className='table table-striped' >
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Todo</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {todos.map((item, index) => {
+                        return (
+                            <tr>
+                                <td>
+                                    {index + 1}
+                                </td>
+                                <td>
+                                    {item}
+                                </td>
+                                <td>
+                                    <button onClick={this.edit.bind(this, index)} >Edit</button>
+                                </td>
+                                <td>
+                                    <button onClick={this.delete.bind(this, index)}>Remove</button>
+                                </td>
+                            </tr>
+                        )
+                    })}
+                </tbody>
+            </table>
+        )
+    }
 
 
     render() {
-        const { todos, currentIndex } = this.state;
+        const { currentIndex } = this.state;
         return (
             <div style={{ textAlign: "center", padding: 10 }}>
                 {this.inputBody()}
@@ -107,39 +144,7 @@ export default class TodoList extends Component {
                     <p>
                         {currentIndex != null ? `You are Currently Editing the  Index ${currentIndex + 1} ` : ""}
                     </p>
-                    {/* <ol>
-                        {todos.map((item, index) => <li>{item}<button onClick={this.edit.bind(this, index)} >Edit</button><button onClick={this.delete.bind(this, index)}>Remove</button></li>)}
-                    </ol> */}
-                    <table className='table table-striped' >
-                        <thead>
-                            <tr>
-                                <th>S.No</th>
-                                <th>Todo</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {todos.map((item, index) => {
-                                return (
-                                    <tr>
-                                        <td>
-                                            {index + 1}
-                                        </td>
-                                        <td>
-                                            {item}
-                                        </td>
-                                        <td>
-                                            <button onClick={this.edit.bind(this, index)} >Edit</button>
-                                        </td>
-                                        <td>
-                                            <button onClick={this.delete.bind(this, index)}>Remove</button>
-                                        </td>
-                                    </tr>
-                                )
-                            })}
-                        </tbody>
-                    </table>
+                    {this.table()}
                 </div>
             </div>
         )
