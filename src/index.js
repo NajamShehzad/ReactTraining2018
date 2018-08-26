@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import { ThisScope } from './ThisDetail';
 import { detail, heading } from './files/detail';
+import TodoList from './components/todo/todo';
 import registerServiceWorker from './registerServiceWorker';
 
 class FinalApp extends React.Component {
@@ -11,12 +12,7 @@ class FinalApp extends React.Component {
         return (
             <div>
                 <App />
-                {/* {heading.map((data, index) => {
-                    return (
-                        <ThisScope key={index+3} heading={data} id={index + 1} detail={detail[index]} />
-                    )
-                }
-                )} */}
+                <TodoList/>
             </div>
         )
     }
