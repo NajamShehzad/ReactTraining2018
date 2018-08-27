@@ -12,7 +12,7 @@ class FinalApp extends React.Component {
         return (
             <div>
                 <App />
-                <TodoList/>
+                <TodoList>TodoList</TodoList>
             </div>
         )
     }

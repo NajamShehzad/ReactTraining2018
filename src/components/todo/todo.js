@@ -57,7 +57,7 @@ export default class TodoList extends Component {
         this.setState({ text: todos[index], currentIndex: index })
     }
     update() {
-        let { text, currentIndex, todos } = this.state;
+        const { text, currentIndex, todos } = this.state;
         todos[currentIndex] = text;
         this.setState(() => {
             return ({
@@ -76,6 +76,13 @@ export default class TodoList extends Component {
 
 
 
+
+
+
+
+
+
+
     inputBody() {
         const { currentIndex } = this.state;
         return (
@@ -88,6 +95,7 @@ export default class TodoList extends Component {
                         style={{ margin: 10 }}
                         value={this.state.text}
                         onChange={this.create}
+                        autoFocus
                     />
                     {currentIndex != null ?
                         <span><button onClick={this.update}>Update</button><button onClick={this.cancle}>Cancle</button></span>
@@ -113,7 +121,7 @@ export default class TodoList extends Component {
                 <tbody>
                     {todos.map((item, index) => {
                         return (
-                            <tr>
+                            <tr key={`${index} ${item} ` }>
                                 <td>
                                     {index + 1}
                                 </td>
