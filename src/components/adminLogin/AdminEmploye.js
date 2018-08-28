@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import swal from 'sweetalert';
-import './AdminEmploye.css'
+import './AdminEmployeStyle.css'
+import AdminPanel from './AdminPanel'
 
 
 
@@ -15,12 +16,49 @@ export default class Admin extends Component {
             login: false
         }
         this.loginScreen = this.loginScreen.bind(this);
+        this.loginCheck = this.loginCheck.bind(this);
+        this.logout = this.logout.bind(this)
     }
 
 
-    alertCheck(e) {
+    loginCheck(e) {
         e.preventDefault();
-        swal("Good job!", "You clicked the button!", "success");
+        const { userName, password } = this.state;
+        console.log(userName, password);
+        if (!userName || !password) {
+            alert('Feel');
+        }
+        else if (userName === 'NajamShehzad' && password === '123456') {
+            swal("Admin Panel", "Welcome Back!", "success");
+            this.setState({
+                login: true
+            })
+        }
+        else {
+            swal({
+                title: "User Name Or Password Is Not Correct!",
+                icon: "warning",
+            });
+        }
+
+    }
+    logout(){
+        this.setState({
+            login:false,userName:'',password:''
+        })   
+    }
+    userName(value) {
+        const userName = value;
+        this.setState({
+            userName
+        })
+
+    }
+    password(value) {
+        const password = value
+        this.setState({
+            password
+        })
     }
 
 
@@ -33,18 +71,29 @@ export default class Admin extends Component {
                     <div className="form-group">
                         <label>
                             User Name:
-                            <input type='text' className="form-control" />
+                            <input
+                                value={this.state.userName}
+                                type='text'
+                                onChange={(event => this.userName(event.target.value))}
+                                className="form-control"
+                                autoFocus
+                            />
                         </label>
                     </div>
                     <div className="form-group" >
                         <label>
                             Password:
-                            <input type='password' className="form-control" />
+                            <input
+                                value={this.state.password}
+                                onChange={(event => this.password(event.target.value))}
+                                type='password'
+                                className="form-control"
+                            />
                         </label>
                     </div>
                     <div>
-                        <button onClick={this.alertCheck}>
-                            Checking
+                        <button className="btn btn-default" onClick={this.loginCheck}>
+                            Login
                         </button>
                     </div>
                 </form>
@@ -52,10 +101,16 @@ export default class Admin extends Component {
         )
     }
 
+
+    
+
+
+
+
     render() {
         return (
             <div>
-                {this.loginScreen()}
+                {!this.state.login ? this.loginScreen() : <AdminPanel logout={this.logout} userName={this.state.userName} />}
             </div>
         )
     }
