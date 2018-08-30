@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import './AdminEmployeStyle.css'
+import './AdminEmployeStyle.css';
+import './flot-button.css';
+import Table from './table';
+
 
 
 export default class AdminPanel extends Component {
@@ -16,15 +19,14 @@ export default class AdminPanel extends Component {
             salary: '',
             date: '',
             editCondition: false,
-            employeList: [
-
-            ]
+            employeList: []
         }
         this.firstName = this.firstName.bind(this);
-        this.addEmploye = this.addEmploye.bind(this);
         this.submitEmploye = this.submitEmploye.bind(this);
         this.saveEdit = this.saveEdit.bind(this);
         this.cancle = this.cancle.bind(this);
+        this.edit = this.edit.bind(this);
+        this.delete = this.delete.bind(this);
     }
 
     firstName(firstName) {
@@ -74,8 +76,9 @@ export default class AdminPanel extends Component {
 
 
 
-
-    addEmploye() {
+    onAdd(e) {
+        e.preventDefault();
+        console.log('Clicked');
         this.setState({
             condition: true
         })
@@ -129,62 +132,6 @@ export default class AdminPanel extends Component {
         })
     }
 
-
-
-
-
-
-
-
-    table() {
-        const { employeList } = this.state;
-        return (
-            <div className="" style={{ margin: 10 }}>
-                <table className='table table-striped' >
-                    <thead>
-                        <tr>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Email</th>
-                            <th>Salary</th>
-                            <th>Join Date</th>
-                            <th>Edit Employe</th>
-                            <th>Delete Employe</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {employeList.map((item, index) => {
-                            return (
-                                <tr key={`${index} ${item} `}>
-                                    <td>
-                                        {item.firstName}
-                                    </td>
-                                    <td>
-                                        {item.lastName}
-                                    </td>
-                                    <td>
-                                        {item.email}
-                                    </td>
-                                    <td>
-                                        {item.salary}
-                                    </td>
-                                    <td>
-                                        {item.date}
-                                    </td>
-                                    <td>
-                                        <button className="btn  btn-outline-secondary" onClick={this.edit.bind(this, index)} >Edit Employe</button>
-                                    </td>
-                                    <td>
-                                        <button className="btn btn-danger" onClick={this.delete.bind(this, index)}>Remove</button>
-                                    </td>
-                                </tr>
-                            )
-                        })}
-                    </tbody>
-                </table>
-            </div>
-        )
-    }
 
 
     inputField() {
@@ -268,7 +215,7 @@ export default class AdminPanel extends Component {
     }
     userInfo() {
         return (
-            <div style={{ textAlign: 'center',margin:10 }}>
+            <div style={{ textAlign: 'center', margin: 10 }}>
                 <button onClick={this.props.logout} className="btn btn-primary">Logout</button>
                 <h1  >
                     {this.props.userName}
@@ -276,14 +223,35 @@ export default class AdminPanel extends Component {
             </div>
         )
     }
+    
+    flotButton() {
+        return (
+            <div >
+
+                <a className="float" onClick={this.onAdd.bind(this)} >
+                    <i className="fa fa-plus my-float"></i>
+                </a>
+                <div className="label-container">
+                    <div className="label-text">Add Employe</div>
+                    <i className="fa fa-play label-arrow"></i>
+                </div>
+            </div>
+        )
+    }
+
     render() {
-        const { condition } = this.state;
+        const { condition,employeList } = this.state;
         return (
             <div className="" style={{ width: "100%" }}>
                 {this.userInfo()}
-                {condition ? this.inputField() : <div style={{ textAlign: 'center' }} ><button className="btn btn-outline-primary" onClick={this.addEmploye}>Add Employe</button></div>}
-                {this.table()}
+                {condition ? this.inputField() : <div></div>}
+                <Table employeList={employeList} edit={this.edit} delete={this.delete}  />
+                {!condition ? this.flotButton():<div></div>}
             </div>
         )
     }
 }
+
+
+// WEBPACK FOOTER //
+// ./src/components/adminLogin/AdminPanel.js

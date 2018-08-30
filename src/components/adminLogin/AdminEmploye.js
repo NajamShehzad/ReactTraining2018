@@ -5,6 +5,7 @@ import AdminPanel from './AdminPanel'
 
 
 
+
 export default class Admin extends Component {
 
     constructor() {
@@ -67,7 +68,8 @@ export default class Admin extends Component {
     loginScreen() {
         return (
             <div className="formDiv">
-                <form className="form">
+            <h1>Admin Login</h1>
+                <form className="form" onSubmit={this.loginCheck}>
                     <div className="form-group">
                         <label>
                             User Name:
@@ -92,7 +94,7 @@ export default class Admin extends Component {
                         </label>
                     </div>
                     <div>
-                        <button className="btn btn-default" onClick={this.loginCheck}>
+                        <button className="btn btn-default">
                             Login
                         </button>
                     </div>
@@ -116,3 +118,7 @@ export default class Admin extends Component {
     }
 
 }
+
+
+// WEBPACK FOOTER //
+// ./src/components/adminLogin/AdminEmploye.js
