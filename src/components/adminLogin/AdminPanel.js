@@ -19,7 +19,11 @@ export default class AdminPanel extends Component {
             salary: '',
             date: '',
             editCondition: false,
-            employeList: []
+            employeList: [
+                { firstName: 'Najam', lastName: 'Shehzad', email: 'najam@gmail.com', date: '2014-02-09', salary: '150,500' },
+                { firstName: 'Ali', lastName: 'Raza', email: 'ali@gmail.com', date: '2017-02-09', salary: '150,500' },
+                { firstName: 'Irfan', lastName: 'Ali', email: 'irfan@gmail.com', date: '2015-02-09', salary: '150,500' },
+            ]
         }
         this.firstName = this.firstName.bind(this);
         this.submitEmploye = this.submitEmploye.bind(this);
@@ -216,14 +220,14 @@ export default class AdminPanel extends Component {
     userInfo() {
         return (
             <div style={{ textAlign: 'center', margin: 10 }}>
-                <button onClick={this.props.logout} className="btn btn-primary">Logout</button>
+                <button onClick={this.props.logout} style={{float:"right"}} className="btn btn-primary"><i className="fa fa-sign-out"></i> Logout</button>
                 <h1  >
                     {this.props.userName}
                 </h1>
             </div>
         )
     }
-    
+
     flotButton() {
         return (
             <div >
@@ -240,13 +244,13 @@ export default class AdminPanel extends Component {
     }
 
     render() {
-        const { condition,employeList } = this.state;
+        const { condition, employeList } = this.state;
         return (
             <div className="" style={{ width: "100%" }}>
                 {this.userInfo()}
                 {condition ? this.inputField() : <div></div>}
-                <Table employeList={employeList} edit={this.edit} delete={this.delete}  />
-                {!condition ? this.flotButton():<div></div>}
+                <Table employeList={employeList} edit={this.edit} delete={this.delete} />
+                {!condition ? this.flotButton() : <div></div>}
             </div>
         )
     }

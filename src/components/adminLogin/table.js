@@ -38,10 +38,10 @@ export default function Table(props) {
                                     {item.date}
                                 </td>
                                 <td>
-                                    <button className="btn  btn-outline-secondary" onClick={() => props.edit(index)} >Edit Employe</button>
+                                    <button class="btn btn-outline-info btn-edit" onClick={() => props.edit(index)}><i class="fa fa-pencil-square-o"></i></button>
                                 </td>
                                 <td>
-                                    <button className="btn btn-danger" onClick={() => props.delete(index)}>Remove</button>
+                                    <button class="btn btn-outline-danger" onClick={() => props.delete(index)}><i class="fa fa-trash-o"></i></button>
                                 </td>
                             </tr>
                         )

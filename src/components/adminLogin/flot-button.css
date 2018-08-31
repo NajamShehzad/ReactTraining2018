@@ -33,8 +33,7 @@
     border-radius:50px;
     cursor: pointer;
 	text-align:center;
-	-webkit-box-shadow: 2px 2px 3px #999;
-	        box-shadow: 2px 2px 3px #999;
+	box-shadow: 2px 2px 3px #999;
 }
 .float:hover{
 	background-color:#0591b8;		
