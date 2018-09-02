@@ -7,7 +7,6 @@ class ClassWork extends Component {
         super()
         this.state = {
             text: '',
-            currentIndex: false,
             list: [
 
             ]
@@ -83,20 +82,20 @@ class ClassWork extends Component {
                     {list.map((data, index) => {
                         return (
                             <tr key={index}>
-                                <td>{data.hide ? "" : data.value}</td>
-                                <td>{data.date}</td>
+                                <td>{!data.hide && data.value}</td>
+                                <td>{!data.hide && data.date}</td>
                                 <td>{data.hide ? <button onClick={() => this.show(index)} >Show</button> : <button onClick={() => this.hide(index)}>Hide</button>}</td>
 
                             </tr>
                         )
                     })}
                 </tbody>
+
             </table>
 
         )
     }
     render() {
-        const { user, form, list } = this.state;
         return (
             <div>
                 {this.Screen()}

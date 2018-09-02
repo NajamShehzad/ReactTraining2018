@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import App from './App';
 import { ThisScope } from './ThisDetail';
 import { detail, heading } from './files/detail';
@@ -16,8 +17,8 @@ class FinalApp extends React.Component {
             <div>
                 <App />
                 {/* <TodoList>TodoList</TodoList> */}
-                {/* <AdminEmploye/> */}
-                <ClassWork />
+                <AdminEmploye/>
+                {/* <ClassWork /> */}
             </div>
         )
     }

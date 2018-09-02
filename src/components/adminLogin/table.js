@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import './table.css'
 
@@ -38,10 +38,10 @@ export default function Table(props) {
                                     {item.date}
                                 </td>
                                 <td>
-                                    <button class="btn btn-outline-info btn-edit" onClick={() => props.edit(index)}><i class="fa fa-pencil-square-o"></i></button>
+                                    <button className="btn btn-outline-info btn-edit" onClick={() => props.edit(index)}><i className="fa fa-pencil-square-o"></i></button>
                                 </td>
                                 <td>
-                                    <button class="btn btn-outline-danger" onClick={() => props.delete(index)}><i class="fa fa-trash-o"></i></button>
+                                    <button className="btn btn-outline-danger" onClick={() => props.delete(index)}><i className="fa fa-trash-o"></i></button>
                                 </td>
                             </tr>
                         )

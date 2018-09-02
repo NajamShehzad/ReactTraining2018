@@ -248,9 +248,9 @@ export default class AdminPanel extends Component {
         return (
             <div className="" style={{ width: "100%" }}>
                 {this.userInfo()}
-                {condition ? this.inputField() : <div></div>}
+                {condition && this.inputField()}
                 <Table employeList={employeList} edit={this.edit} delete={this.delete} />
-                {!condition ? this.flotButton() : <div></div>}
+                {!condition && this.flotButton()}
             </div>
         )
     }
