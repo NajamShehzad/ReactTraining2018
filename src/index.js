@@ -9,6 +9,7 @@ import { detail, heading } from './files/detail';
 import TodoList from './components/todo/todo';
 import ClassWork from './components/classPractice/classWork'
 import AdminEmploye from './components/adminLogin/AdminEmploye';
+import Bulb from './components/blub/bulb'
 import registerServiceWorker from './registerServiceWorker';
 
 
@@ -18,8 +19,9 @@ class FinalApp extends React.Component {
             <div>
                 <App />
                 {/* <TodoList>TodoList</TodoList> */}
-                <AdminEmploye/>
+                {/* <AdminEmploye/> */}
                 {/* <ClassWork /> */}
+                <Bulb />
             </div>
         )
     }
