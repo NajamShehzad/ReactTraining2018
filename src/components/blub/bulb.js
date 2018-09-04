@@ -2,8 +2,19 @@ import React, { Component } from 'react';
 import bulb from './bulbSimple.jpg';
 import LightBulb from './lightBulb'
 import BrokenBulb from './brokenBulb';
-import BreakTheBulb from './breakTheBulb'
+import BreakTheBulb from './breakTheBulb';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 
+const styles = theme => ({
+    button: {
+        margin: theme.spacing.unit,
+    },
+    input: {
+        display: 'none',
+    },
+});
 
 class Bulb extends Component {
 
@@ -26,19 +37,25 @@ class Bulb extends Component {
     }
 
     render() {
+        const { classes } = this.props;
         const { bulbOn, breakBulb } = this.state;
         return (
             <div>
+                <div>
+
+                </div>
                 <div style={{ textAlign: "center" }}>
                     {breakBulb ? <BrokenBulb /> :
                         <div>
                             {!bulbOn ?
                                 <div>
-                                    <img src={bulb} width="450" height="500" />
+                                    <img alt="SimpleOffBulb" src={bulb} width="450" height="500" />
                                     <div>
-                                        <button onClick={this.change}>On The Bulb</button>
+                                        <Button onClick={this.change} variant="outlined" className={classes.button}>
+                                            Light The Bulb
+                                        </Button>
                                     </div>
-                                </div> : <div> <LightBulb change={this.change} /><BreakTheBulb break={this.break}/></div>
+                                </div> : <div> <LightBulb change={this.change} /><BreakTheBulb break={this.break} /></div>
                             }
                         </div>
 
@@ -49,8 +66,8 @@ class Bulb extends Component {
         )
     }
 
-
-
-
 }
-export default Bulb;
+Bulb.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+export default withStyles(styles)(Bulb);
