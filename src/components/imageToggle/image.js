@@ -22,8 +22,8 @@ export default class Image extends Component {
         const { show } = this.state;
         return (
             <div style={{margin:20}}>
-                <Button text="Off Image" changeImage={() => this.toggleImage(true)} />
-                <Button text="On Image" changeImage={() => this.toggleImage(false)} />
+                <Button text="Show Image" onPress={() => this.toggleImage(true)} />
+                <Button text="Hide Image" onPress={() => this.toggleImage(false)} />
                 <br />
                 {show && <img src={image} style={{ width: 500, height: 500 }} />}
             </div>

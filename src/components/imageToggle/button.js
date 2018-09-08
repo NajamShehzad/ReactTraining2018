@@ -1,13 +1,10 @@
 import React from 'react';
 
 
-
-
-
 const Button = (props) =>{
-    const {changeImage} = props;
+    const {onPress} = props;
     return(
-        <button style={{width:100,height:50,margin:20}} onClick={changeImage}>
+        <button style={{width:150,height:50,margin:20}} onClick={onPress}>
             {props.text}
         </button>
     )
