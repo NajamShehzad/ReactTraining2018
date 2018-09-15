@@ -1,6 +1,5 @@
 import React from 'react';
 import lightBulb from './lightBulb.webp';
-import PropsTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 

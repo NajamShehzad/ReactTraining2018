@@ -25,7 +25,7 @@ export default class Image extends Component {
                 <Button text="Show Image" onPress={() => this.toggleImage(true)} />
                 <Button text="Hide Image" onPress={() => this.toggleImage(false)} />
                 <br />
-                {show && <img src={image} style={{ width: 500, height: 500 }} />}
+                {show && <img src={image} alt="MyPic" style={{ width: 500, height: 500 }} />}
             </div>
         )
     }

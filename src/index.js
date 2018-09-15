@@ -10,7 +10,8 @@ import TodoList from './components/todo/todo';
 import ClassWork from './components/classPractice/classWork'
 import AdminEmploye from './components/adminLogin/AdminEmploye';
 import Bulb from './components/blub/bulb';
-import Image from './components/imageToggle/image';
+import Issues from './components/Issues/Issue';
+// import Image from './components/imageToggle/image';
 import Quiz from './components/Quiz/Quiz';
 import registerServiceWorker from './registerServiceWorker';
 
@@ -25,7 +26,8 @@ class FinalApp extends React.Component {
                 {/* <ClassWork /> */}
                 {/* <Bulb /> */}
                 {/* <Image/> */}
-                <Quiz />
+                {/* <Quiz /> */}
+                <Issues />
             </div>
         )
     }

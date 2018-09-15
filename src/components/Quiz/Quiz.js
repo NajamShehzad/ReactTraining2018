@@ -22,16 +22,15 @@ export default class Quiz extends Component {
         this.resetQuiz = this.resetQuiz.bind(this);
     }
     startQuiz(index) {
-        console.log(index);
         this.setState({
-            activeQuiz:this.state.quizList[index],
+            activeQuiz: this.state.quizList[index],
             quiz: true
         })
 
     }
-    resetQuiz(){
+    resetQuiz() {
         this.setState({
-            activeQuiz:null,
+            activeQuiz: null,
             quiz: false
         })
     }
@@ -39,7 +38,7 @@ export default class Quiz extends Component {
 
 
     render() {
-        const { quiz, quizList,activeQuiz } = this.state;
+        const { quiz, quizList, activeQuiz } = this.state;
         return (
             <div style={{ margin: 20 }}>
                 {quiz ? <QuizScreen quiz={activeQuiz} onPress={this.resetQuiz} /> : <QuizList list={quizList} onPress={this.startQuiz} />}
