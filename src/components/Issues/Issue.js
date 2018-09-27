@@ -6,27 +6,70 @@ class Issues extends Component {
     constructor() {
         super();
         this.state = {
-            data: Data
+            data: Data,
+            text: '',
+            searchData: Data
         }
+        this.search = this.search.bind(this);
     }
 
+
     changeFavorite(index) {
-        const { data } = this.state;
+        const { searchData } = this.state;
 
-        data[index].isFavorite = !data[index].isFavorite;
+        searchData[index].isFavorite = !searchData[index].isFavorite;
 
-        this.setState({ data });
+        this.setState({ searchData });
+    }
+
+    search(e) {
+        const text = e.target.value;
+        let { searchData, data } = this.state;
+        if (text === "is:open") {
+            searchData = data.filter(data => {
+                return data.isOpen;
+            })
+        } else if (text === "is:close") {
+            searchData = data.filter(data => {
+                return !data.isOpen;
+            })
+        }
+        else {
+            searchData = data;
+        }
+        this.setState({ text, searchData })
     }
 
 
     render() {
-        const { data } = this.state;
+        const { searchData, text } = this.state;
         return (
             <div>
-                {data.map((data, index) => {
+                <div>
+                    <div style={{ textAlign: 'center' }}>
+                        <input
+                            type='text'
+                            value={text}
+                            onChange={this.search}
+                        />
+                    </div>
+                </div>
+                {searchData.map((data, index) => {
                     return (
-                        <div key={data.title} style={{ margin: 10 }}>
-                            <h2>{data.title}</h2>
+                        <div key={data.title + index} style={{ margin: 10 }}>
+
+                            <h2>
+                                {data.isOpen ?
+                                    <i style={{ color: 'green' }}
+                                        className="fa fa-check-circle"></i>
+
+                                    :
+                                    <i
+                                        className="fa fa-check-circle"></i>
+                                }
+
+                                {data.title}
+                            </h2>
                             <h3>{data.date.toLocaleString()}</h3>
                             <div style={{ fontSize: 30 }}>
                                 <i className="fa fa-comment-o"></i>

@@ -3,7 +3,7 @@ export const Data = [
         title: 'Some Code Break',
         comments: 4,
         date: new Date(),
-        isOpen: false,
+        isOpen: true,
         isFavorite: false
     },
     {
@@ -14,7 +14,7 @@ export const Data = [
         isFavorite: true
     },
     {
-        title: 'Bugs In Randaring',
+        title: 'Bugs In Rendering',
         comments: 1,
         date: new Date(),
         isOpen: false,
@@ -24,7 +24,28 @@ export const Data = [
         title: 'Download Issue',
         comments: 7,
         date: new Date(),
+        isOpen: true,
+        isFavorite: true
+    },
+    {
+        title: 'Code Error',
+        comments: 3,
+        date: new Date(),
         isOpen: false,
+        isFavorite: true
+    },
+    {
+        title: 'Bugs In Rendering',
+        comments: 1,
+        date: new Date(),
+        isOpen: false,
+        isFavorite: false
+    },
+    {
+        title: 'Download Issue',
+        comments: 7,
+        date: new Date(),
+        isOpen: true,
         isFavorite: true
     }
 ];
