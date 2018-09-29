@@ -10,17 +10,27 @@ class Kid extends Component {
         };
     }
 
-    componentDidMount(){
-        this.setState({danceSteps:['step1','step2','step3'],startedPerforming:true})
+    componentDidMount() {
+        this.setState({ danceSteps: ['step1', 'step2', 'step3'], startedPerforming: true })
     }
 
-    componentWillReceiveProps(nextProps){
-        console.log(nextProps);
-        this.setState({danceSteps:nextProps.furtherSteps,currentStepIndex:0});
-        if(nextProps.applaud == true){
-            this.setState({emotion:"Happy"})
+    // componentWillReceiveProps(nextProps){
+    //     console.log(nextProps);
+    //     this.setState({danceSteps:nextProps.furtherSteps,currentStepIndex:0});
+    //     if(nextProps.applaud == true){
+    //         this.setState({emotion:"Happy"})
+    //     }
+
+    // }
+
+    static getDerivedStateFromProps(props, state) {
+
+        const danceSteps =[...state.danceSteps, ...props.furtherSteps] ;
+        return {
+            danceSteps: state.danceSteps.length < 5 ? danceSteps : state.danceSteps,
+            startedPerforming:danceSteps.length > 5 ,
+            emotion:props.applaud ? 'Happy' :'Nervious'
         }
-        
     }
 
     qualified() {

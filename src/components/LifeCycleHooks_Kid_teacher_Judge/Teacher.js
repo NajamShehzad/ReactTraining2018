@@ -7,7 +7,7 @@ class Teacher extends Component {
     }
     
     sendDataToKid() {
-        const furtherSteps = [ 'step4', 'step5','step6','step7','step8']
+        const furtherSteps = [ 'step4', 'step5','step6','step7','step8','step9','step10','step11']
         this.props.sendSteps(furtherSteps);
     }
     render() {

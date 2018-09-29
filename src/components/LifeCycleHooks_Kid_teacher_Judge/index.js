@@ -25,6 +25,7 @@ class LifeCycle extends Component {
     }
 
     sendSteps(kidSteps) {
+        
         this.setState({ kidSteps })
 
     }

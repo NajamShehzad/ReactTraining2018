@@ -13,7 +13,10 @@ class Judge extends Component {
     }
     provideStars() {
         let { stars } = this.state;
-        this.setState({ stars: ++stars })
+        stars++;
+        if (stars <= 5) {
+            this.setState({ stars })
+        }
     }
     render() {
         const { stars, available } = this.state;
