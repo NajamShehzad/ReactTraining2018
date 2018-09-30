@@ -32,6 +32,9 @@ class Kid extends Component {
             emotion:props.applaud ? 'Happy' :'Nervious'
         }
     }
+    componentWillUnmount(){
+        this.props.exitJudge(false);
+    }
 
     qualified() {
         this.setState({ startedPerforming: false })

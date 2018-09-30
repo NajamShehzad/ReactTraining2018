@@ -17,6 +17,9 @@ class Judge extends Component {
         if (stars <= 5) {
             this.setState({ stars })
         }
+        else if(stars > 5){
+            this.props.exitKid(false);
+        }
     }
     render() {
         const { stars, available } = this.state;

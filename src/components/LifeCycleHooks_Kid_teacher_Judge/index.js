@@ -12,12 +12,16 @@ class LifeCycle extends Component {
         this.state = {
             volume: 0,
             kidSteps: [],
-            kidStars:0,
-            kidApplaud:false
+            kidStars: 0,
+            kidApplaud: false,
+            kidApper: true,
+            judge: true
         }
         this.sendSteps = this.sendSteps.bind(this);
         this.sendStars = this.sendStars.bind(this);
         this.sendApplaud = this.sendApplaud.bind(this);
+        this.exitKid = this.exitKid.bind(this);
+        this.exitJudge = this.exitJudge.bind(this);
     }
 
     componentWillMount() {
@@ -25,24 +29,30 @@ class LifeCycle extends Component {
     }
 
     sendSteps(kidSteps) {
-        
+
         this.setState({ kidSteps })
 
     }
-    sendStars(kidStars){
-        this.setState({kidStars})
+    sendStars(kidStars) {
+        this.setState({ kidStars })
     }
-    sendApplaud(kidApplaud){
-       this.setState({kidApplaud})
+    sendApplaud(kidApplaud) {
+        this.setState({ kidApplaud })
+    }
+    exitKid(bool) {
+        this.setState({ kidApper: bool });
+    }
+    exitJudge(bool) {
+        this.setState({ judge: bool })
     }
 
     render() {
-        const { kidSteps,kidApplaud } = this.state;
+        const { kidApper, judge, kidSteps, kidApplaud } = this.state;
         return (
             <div style={{ margin: "50px" }}>
-                <Teacher sendSteps={this.sendSteps} />
-                <Kid dressColor="yellow" applaud={kidApplaud} furtherSteps={kidSteps} />
-                <Judge  sendApplaud={this.sendApplaud} sendStars={this.sendStars}/>
+                {kidApper && <Teacher sendSteps={this.sendSteps} />}
+                {kidApper && <Kid exitJudge={this.exitJudge} dressColor="yellow" applaud={kidApplaud} furtherSteps={kidSteps} />}
+                {judge && <Judge sendApplaud={this.sendApplaud} exitKid={this.exitKid} sendStars={this.sendStars} />}
             </div>
         )
     }
