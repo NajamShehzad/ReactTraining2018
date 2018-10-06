@@ -10,41 +10,75 @@ class AlgoliaSearch extends Component {
         super()
         this.state = {
             search: '',
-            data: []
+            data: [],
+            page: '0'
         }
     }
 
-    search = (e) => {
-        const { search, data } = this.state;
-        e.preventDefault();
-        fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${search}&&${PARAM_PAGE}`)
-            .then(data1 => {
-                return data1.json()
-            })
-            .then(searchData => {
-                console.log(searchData.hits);
-                console.log(data);
+    search = (e = '') => {
+        let { search, data, page, searchWord } = this.state;
+        if (e !== "") {
+            e.preventDefault();
+        }
+        console.log('Search');
 
-                this.setState({ data: data.concat(searchData.hits) })
-            })
+        if (searchWord === search) {
+            fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchWord}&&${PARAM_PAGE}${page}`)
+                .then(data1 => {
+                    return data1.json()
+                })
+                .then(searchData => {
+                    console.log(searchData.hits);
+                    // console.log(data);
+
+                    this.setState({ data: data.concat(searchData.hits), page: page + 1 })
+                })
+        } else {
+            fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchWord}&&${PARAM_PAGE}${0}`)
+                .then(data1 => {
+                    return data1.json()
+                })
+                .then(searchData => {
+                    console.log(searchData.hits);
+                    // console.log(data);
+
+                    this.setState({ data: searchData.hits, page: 0, searchWord: search })
+                })
+        }
 
     }
 
+    componentDidMount() {
+        this.refs.iScroll.addEventListener("scroll", () => {
+            if (this.refs.iScroll.scrollTop + this.refs.iScroll.clientHeight >= this.refs.iScroll.scrollHeight) {
+                this.search();
+            }
+        });
+    }
+
     render() {
-        const { search, data } = this.state;
+        const { search, data,page } = this.state;
         return (
-            <div style={{ textAlign: 'center' }}>
+            <div ref="iScroll" style={{ height: "500px", overflow: "auto", textAlign: 'center' }}>
                 <form onSubmit={this.search}>
                     <input
                         value={search}
-                        onChange={(e) => this.setState({ search: e.target.value })}
+                        onChange={(e) => {
+                            if (e.target.value == "") {
+                                this.setState({ search: '', data: [], page: '0' })
+                            }
+                            this.setState({ search: e.target.value })
+                        }}
                     />
                     <button>
                         Search
                     </button>
+                    <h4>
+                        Page = {page}
+                    </h4>
                 </form>
                 <div>
-                    {data.map((data,index) => {
+                    {data.map((data, index) => {
                         return (
                             <div key={data.objectID + index}>
                                 {data.title}
