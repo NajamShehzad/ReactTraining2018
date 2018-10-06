@@ -15,12 +15,16 @@ class AlgoliaSearch extends Component {
         }
     }
 
-    search = (e = '') => {
+    search = (e = '', pageNo) => {
         let { search, data, page, searchWord } = this.state;
-        if (e !== "") {
+        if (e !== '' && !pageNo) {
             e.preventDefault();
         }
         console.log('Search');
+        if (pageNo) {
+            page = pageNo;
+            data = []
+        }
 
         if (searchWord === search) {
             fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchWord}&&${PARAM_PAGE}${page}`)
@@ -30,8 +34,7 @@ class AlgoliaSearch extends Component {
                 .then(searchData => {
                     console.log(searchData.hits);
                     // console.log(data);
-
-                    this.setState({ data: data.concat(searchData.hits), page: page + 1 })
+                    this.setState({ data: data.concat(searchData.hits), page: Number(page) + 1 })
                 })
         } else {
             fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchWord}&&${PARAM_PAGE}${0}`)
@@ -48,16 +51,16 @@ class AlgoliaSearch extends Component {
 
     }
 
-    componentDidMount() {
-        this.refs.iScroll.addEventListener("scroll", () => {
-            if (this.refs.iScroll.scrollTop + this.refs.iScroll.clientHeight >= this.refs.iScroll.scrollHeight) {
-                this.search();
-            }
-        });
-    }
+    // componentDidMount() {
+    //     this.refs.iScroll.addEventListener("scroll", () => {
+    //         if (this.refs.iScroll.scrollTop + this.refs.iScroll.clientHeight >= this.refs.iScroll.scrollHeight) {
+    //             this.search();
+    //         }
+    //     });
+    // }
 
     render() {
-        const { search, data,page } = this.state;
+        const { search, data, page } = this.state;
         return (
             <div ref="iScroll" style={{ height: "500px", overflow: "auto", textAlign: 'center' }}>
                 <form onSubmit={this.search}>
@@ -74,7 +77,7 @@ class AlgoliaSearch extends Component {
                         Search
                     </button>
                     <h4>
-                        Page = {page}
+                        Page = {page == 0 ? page : page - 1}
                     </h4>
                 </form>
                 <div>
@@ -85,6 +88,13 @@ class AlgoliaSearch extends Component {
                             </div>
                         )
                     })}
+                </div>
+                <div>
+                    <span onClick={() => this.search(null, '1')}>Page1</span>
+                    <span onClick={() => this.search(null, '2')}>Page2</span>
+                    <span onClick={() => this.search(null, '3')}>Page3</span>
+                    <span onClick={() => this.search(null, '4')} >Page4</span>
+                    <span onClick={() => this.search(null, '5')}>Page5</span>
                 </div>
             </div>
         )
