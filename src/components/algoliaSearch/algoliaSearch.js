@@ -11,7 +11,8 @@ class AlgoliaSearch extends Component {
         this.state = {
             search: '',
             data: [],
-            page: '0'
+            page: '0',
+            searched:{}
         }
     }
 
@@ -45,7 +46,7 @@ class AlgoliaSearch extends Component {
                     console.log(searchData.hits);
                     // console.log(data);
 
-                    this.setState({ data: searchData.hits, page: 0, searchWord: search })
+                    this.setState({ data: searchData.hits, page: 0, searchWord: search ,[searchWord]:searchData})
                 })
         }
 

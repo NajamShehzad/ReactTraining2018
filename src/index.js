@@ -15,6 +15,9 @@ import Issues from './components/Issues/Issue';
 import Quiz from './components/Quiz/Quiz';
 import LifeCycle from './components/LifeCycleHooks_Kid_teacher_Judge/index';
 import AlgoliaSearch from './components/algoliaSearch/algoliaSearch';
+import FacebookPost from './components/FacebookPost/FacebookPost';
+
+
 import registerServiceWorker from './registerServiceWorker';
 
 
@@ -31,7 +34,8 @@ class FinalApp extends React.Component {
                 {/* <Quiz /> */}
                 {/* <Issues /> */}
                 {/* <LifeCycle /> */}
-                <AlgoliaSearch />
+                {/* <AlgoliaSearch /> */}
+                <FacebookPost />
             </div>
         )
     }

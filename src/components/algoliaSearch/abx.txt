@@ -1,0 +1,112 @@
+import React, { Component } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+
+const PATH_BASE = "https://hn.algolia.com/api/v1";
+const PATH_SEARCH = "/search";
+const PARAM_SEARCH = "query=";
+const PARAM_PAGE = "page=";
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      text: "",
+      page: "0",
+      result: [],
+      pageNo: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      searched: {}
+    };
+    this.fetchData = this.fetchData.bind(this);
+    this.nextPage = this.nextPage.bind(this);
+    // API: https://hn.algolia.com/api/v1/search?query=<text>&&page=0
+  }
+
+  componentDidMount() {
+    // this.refs.iScroll.addEventListener("scroll", () => {
+    //   console.log("listner");
+    //   if (this.refs.iScroll.scrollTop + this.refs.iScroll.clientHeight >= this.refs.iScroll.scrollHeight){
+    //     this.nextPage();
+    //   }
+    // });
+  }
+  nextPage() {
+    console.log("function scroll");
+    const { page } = this.state;
+    this.setState({ page: page * 1 + 1 });
+    this.fetchData("nextpage");
+  }
+  searchFor(res){
+    // console.log("function scroll");
+    const { page } = this.state;
+    console.log(res);
+    this.state.page = res;
+    this.fetchData("searchFor");
+  }
+
+  fetchData(res) {
+    const { text, page, result,searched } = this.state;
+    console.log(searched[text]);
+    if(searched[text]){
+      this.setState({result:searched[text]});
+      console.log("from State");
+    }
+    else{
+
+    
+    if (res == "Empty") {
+      this.state.page = "0";
+    }
+    fetch(
+      `${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${text}&&${PARAM_PAGE}${page}`
+    )
+      .then(res => res.json())
+      .then(resp => {
+        console.log(resp.hits);
+        if (res == "Empty") {
+          this.setState({ result: resp.hits, page: 0 });
+        }
+        else if(res == "searchFor") {
+          this.setState({ result: resp.hits });
+        }
+        else {
+          this.setState({ result: result.concat(resp.hits) });
+        }
+        
+      this.state.searched[text] = resp.hits;
+      }); 
+    }
+  }
+  render() {
+    const { result, page, pageNo } = this.state;
+    return (
+      <div style={{ height: "100vh", overflow: "auto" }}>
+        {/* use this for infinite scroll */}
+        {/* <div ref="iScroll" style={{ height: "100vh", overflow: "auto" }}> */}
+        <header className="App-header">
+          <input
+            type="text"
+            onChange={e => this.setState({ text: e.target.value })}
+          />
+          <button onClick={() => this.fetchData("Empty")}>Search</button>
+          <button onClick={this.nextPage}>Next Page</button>
+          <p>Page No = {page}</p>
+          <ul>
+            {result.map((value, index) => {
+              // console.log(value.title);
+              return <li>{value.title}</li>;
+            })}
+          </ul>
+          <h3>
+            {result.length &&
+              pageNo.map((value, index) => {
+                console.log(value);
+               return (<b onClick={() => this.searchFor(value)}>{value} | </b>)
+              })}
+          </h3>
+        </header>
+      </div>
+    );
+  }
+}
+
+export default App;
