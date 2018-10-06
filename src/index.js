@@ -13,7 +13,8 @@ import Bulb from './components/blub/bulb';
 import Issues from './components/Issues/Issue';
 // import Image from './components/imageToggle/image';
 import Quiz from './components/Quiz/Quiz';
-import LifeCycle from './components/LifeCycleHooks_Kid_teacher_Judge/index'
+import LifeCycle from './components/LifeCycleHooks_Kid_teacher_Judge/index';
+import AlgoliaSearch from './components/algoliaSearch/algoliaSearch';
 import registerServiceWorker from './registerServiceWorker';
 
 
@@ -29,7 +30,8 @@ class FinalApp extends React.Component {
                 {/* <Image/> */}
                 {/* <Quiz /> */}
                 {/* <Issues /> */}
-                <LifeCycle />
+                {/* <LifeCycle /> */}
+                <AlgoliaSearch />
             </div>
         )
     }
